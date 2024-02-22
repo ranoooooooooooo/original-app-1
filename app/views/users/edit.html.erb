@@ -1,0 +1,60 @@
+<main class="main">
+  <div class="inner2">
+    <div class="form__wrapper">
+      <h2 class="page-heading">ユーザー情報編集</h2>
+
+      <%= form_with model: @user, url: user_path, data: {turbo_method: :patch}, local: true do |f| %>
+
+      <div class="field">
+        <%= f.label :email, "Email" %><br />
+        <%= f.email_field :email, id:"user_email", autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "Password（6文字以上）" %><br />
+        <%= f.password_field :password, id:"user_password", autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "Password Confirmation（再入力）" %><br />
+        <%= f.password_field :password_confirmation, id:"user_password_confirmation", autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :nickname, "User Name（ニックネーム可）" %><br />
+        <%= f.text_field :nickname, id:"user_name" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :profile, "Profile" %><br />
+        <%= f.text_area :profile, class: :form__text, id:"user_profile" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :birthday	, "Birthday" %><br />
+        <%= raw sprintf(
+                f.date_select(
+                  :birthday,
+                  class:"select-birth",
+                  id:"birth-date",
+                  use_month_numbers: true,
+                  prompt:'--',
+                  start_year: 1930,
+                  end_year: (Time.now.year - 5),
+                  style: "width: 20px",
+                  date_separator: '%s'),
+                "年 ", "月 ") + "日 " %>
+      </div>
+
+      <div class="field">
+        <%= image_tag "camera.png", class: 'icon2' %>
+        <%= f.file_field :image, id: "user_image" %>
+      </div>
+
+      <div class="form__submit">
+        <%= f.submit "Update", class:'nav__btn'  %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</main>

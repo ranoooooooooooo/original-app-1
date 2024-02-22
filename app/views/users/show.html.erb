@@ -1,0 +1,64 @@
+<main class="main">
+  <div class="left">
+    <%= render partial: "shared/users_friends" %>
+  </div>
+
+  <div class="right">
+    <div class="inner2">
+      <div class="user_profile_title">
+        <%= "#{@user.nickname}"%>
+        <div class="under_line"></div>
+      </div>
+      <div class="user_profile">
+        <div class='user_profile_box'>
+          <div class='form__field'>
+            <% if user_signed_in? && @user == current_user %>
+            <%= image_tag "email.png", class: 'icon' %>
+            <%= "#{@user.email}" %>
+            <% end %>
+          </div>
+          <div class='form__field'>
+            <%= image_tag "profile.png", class: 'icon' %>
+            <%= "#{@user.profile}" %>
+          </div>
+          <div class='form__field'>
+            <% if user_signed_in? && @user == current_user %>
+            <%= image_tag "birthday.png", class: 'icon' %>
+            <%= "#{@user.birthday}" %>
+            <% end %>
+          </div>
+          <div class='form__field'>
+            <% if user_signed_in? && @user == current_user %>
+            <%= image_tag "pencil.png", class: 'icon' %>
+            <%= link_to "編集", edit_user_path, class: "nav__btn" %>
+            <% end %>
+          </div>
+        </div>
+        <div class='user_profile_image'>
+          <% if @user.image.present? %>
+            <%= image_tag @user.image, class: "user_image" %>
+          <% else %>
+            <%= image_tag "human.png", class: "user_image" %>
+          <% end %>
+        </div>
+      </div>
+
+      <% if user_signed_in? && @user == current_user %>
+      <div class="user_profile_title">
+        <%= "参加中のルーム"%>
+        <div class="under_line"></div>
+      </div>
+      <%= render partial: "shared/rooms" %>
+      <% end %>
+
+      <% if user_signed_in? && @user == current_user %>
+      <div class="under_line"></div>
+      <div class='form__field2'>
+        <%= image_tag "gomi.png", class: 'icon' %>
+        <%= link_to "アカウント削除", new_user_registration_path, data: {turbo_method: :delete}, class: "nav__btn" %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</main>

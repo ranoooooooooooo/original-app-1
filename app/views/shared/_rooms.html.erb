@@ -1,0 +1,26 @@
+<ul class='room-lists'>
+  <% if @user_rooms.present? %>
+    <% @user_rooms.each do |user_room| %>
+    <li class='list'>
+      <%= link_to room_path(user_room.room_id) do %>
+      <div class='room-img-content'>
+        <%= image_tag user_room.room.image, class: "room-img" %> 
+      </div>
+      <div class='room-info'>
+        <h3 class='room-name'><%= "#{user_room.room.name}" %></h3>
+      </div>
+      <% end %>
+    </li>
+    <% end %>
+
+  <% else %>
+    <li class='list'>
+      <%= link_to new_room_path do %>
+      <%= image_tag "calender.png", class: "room-img" %>
+      <div class='room-info'>
+        <h3 class='room-name'>友達を招待してカレンダーを共有しよう！</h3>
+      </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

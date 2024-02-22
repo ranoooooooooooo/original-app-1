@@ -1,0 +1,38 @@
+<div class="left-top">
+  <div class="current_user">
+  <% if user_signed_in? %>
+    <div class="user" >
+      <%= link_to "/users/#{current_user.id}" do %>
+        <% if current_user.image.present? %>
+          <%= image_tag current_user.image, class: "user-img" %>
+        <% else %>
+          <%= image_tag "human.png", class: "user-img" %>
+        <% end %>
+      <% end %>
+      <%= link_to "#{current_user.nickname}", "/users/#{current_user.id}", class: "user_link" %>
+    </div>
+  <% end %>
+  </div>
+  <%= link_to "新規投稿", new_room_post_path(@room.id), class: :nav__btn %>
+</div>
+
+<div class="left-bottom">
+  <div class="left-bottom-title">ルームメンバー</div>
+  <% if user_signed_in? %>
+    <% @room_users.each do |room_user| %>
+    <div class="user" >
+      <% if room_user.user.id != current_user.id %>
+        <%= link_to "/users/#{room_user.user.id}" do %>
+          <% if room_user.user.image.present? %>
+            <%= image_tag room_user.user.image, class: "user-img" %>
+          <% else %>
+            <%= image_tag "human.png", class: "user-img" %>
+          <% end %>
+        <% end %>
+        <%= link_to "#{room_user.user.nickname}", "/users/#{room_user.user.id}", class: "user_link" %>
+      <% end %>
+    </div>
+    <% end %>
+  <% end %>
+  </div>
+</div>

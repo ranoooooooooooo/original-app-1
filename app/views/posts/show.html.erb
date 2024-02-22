@@ -1,0 +1,53 @@
+<main class="main">
+  <div class="left">
+    <%= render partial: "shared/users_in_room" %>
+  </div>
+
+  <div class="right">
+    <div class="inner2">
+      
+      <% if @post.image.present? %>
+        <%= image_tag @post.image, class: "post_image" %>
+      <% end %>
+      <div class="user_profile_title">
+        <%= "#{@post.title}"%>
+        <div class="under_line"></div>
+      </div>
+      <div class='user_profile_box'>
+        <div class='form__field'>
+          <%= image_tag "type.png", class: 'icon' %>
+          種別： <%= "#{@post.type.name}" %>
+        </div>
+        <div class='form__field'>
+          <%= image_tag "date.png", class: 'icon' %>
+          日付： <%= "#{@post.date}" %>
+        </div>
+        <div class='form__field'>
+          <%= image_tag "time.png", class: 'icon' %>
+          開始： <%= "#{(@post.start_time).strftime("%Y年%m月%d日 %a %H:%M")}" %>
+        </div>
+        <div class='form__field'>
+          <%= image_tag "time.png", class: 'icon' %>
+          終了： <%= "#{(@post.end_time).strftime("%Y年%m月%d日 %a %H:%M")}" %>
+        </div>
+        <div class='form__field'>
+          <%= image_tag "memo.png", class: 'icon' %>
+          <%= "#{@post.content}" %>
+        </div>
+        <div class='form__field'>
+        <% if user_signed_in? && @post.user.id == current_user.id %>
+          <%= image_tag "pencil.png", class: 'icon' %>
+          <%= link_to "　編集　", edit_room_post_path, class: "nav__btn" %>
+        <% end %>
+        </div>
+        <div class='form__field'>
+        <% if user_signed_in? && @post.user.id == current_user.id %>
+          <%= image_tag "gomi.png", class: 'icon' %>
+          <%= link_to "投稿削除", room_posts_path, data: {turbo_method: :delete}, class: "nav__btn" %>
+        <% end %>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</main>

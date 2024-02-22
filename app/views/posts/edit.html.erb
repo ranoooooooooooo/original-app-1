@@ -1,0 +1,57 @@
+<main class="main">
+  <div class="left">
+    <%= render partial: "shared/users_in_room" %>
+  </div>
+
+  <div class="right">
+    <div class='form'>
+      <h1>投稿編集</h1>
+      <%= form_with model: @post, url: room_post_path, data: {turbo_method: :patch}, local: true do |f|%>
+      <div class='form__field'>
+        <%= image_tag "pencil.png", class: 'icon' %>
+        <%= f.text_field :title, class: 'form__input', placeholder: 'タイトルを入力してください (必須)'%>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "type.png", class: 'icon' %>
+        <%= f.collection_select(:type_id, Type.all, :id, :name, {class:"select-box", id:"type"}) %>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "date.png", class: 'icon' %>
+        <%= f.date_select :start_time, class: 'form__input' %>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "time.png", class: 'icon' %>
+        <%= f.label :start_time	, "start" %>&nbsp;
+        <%= f.datetime_select :start_time, class: 'form__input' %>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "time.png", class: 'icon' %>
+        <%= f.label :end_time	, "end" %>&ensp;
+        <%= f.datetime_select :end_time, class: 'form__input' %>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "memo.png", class: 'icon' %>
+        <%= f.text_area :content, class: 'form__input2', placeholder: ''%>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "camera.png", class: 'icon' %>
+        <%= f.file_field :image, class: "image_select" %>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "human.png", class: 'icon' %>
+        <select name="room[user_ids][]">
+          <option value="">招待する友達を選択してください</option>
+          <% User.where.not(id: current_user.id).each do |user| %>
+            <option value=<%= user.id %>><%= user.nickname %></option>
+          <% end %>
+        </select>
+        <input name="room[user_ids][]" type="hidden" value=<%= current_user.id %>>
+      </div>
+      <div class='form__field'>
+        <%= image_tag "go.png", class: 'icon' %>
+        <%= f.submit class: 'nav__btn'%>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</main>

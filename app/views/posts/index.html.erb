@@ -1,0 +1,47 @@
+<main class="main">
+  <div class="left">
+    <%= render partial: "shared/users_in_room" %>
+  </div>
+
+  <div class="right">
+
+    <div class="calendar">
+      <p id="notice"><%= notice %></p>
+
+      <h1 class="top"> 
+        <%= "#{@room.name}" %>
+        <font size="5">のカレンダー</font>
+      </h1>
+      
+      <div class="room_edit">
+        <%= link_to "新規投稿", new_room_post_path(@room.id), class: :nav__btn %>&ensp;
+        <%= link_to "ルーム編集", edit_room_path(@room.id), class: :nav__btn %>
+      </div>
+
+      <div class="col-md-8">
+      <%= month_calendar events: @posts do |date, posts| %>
+        <%= date.day %>
+        <% posts.each do |post| %>
+        <div>
+          <%= link_to room_post_path(post.room_id, post) do %>
+            <% if post.image.present? %>
+              <%= image_tag post.image, class: "post-img" %>
+            <% end %>
+          <% end %>
+          <%= link_to post.title, room_post_path(post.room_id, post) %>
+        </div>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="under_line"></div>
+    <div class='form__field2'>
+      <% if user_signed_in? && @room_user.user.id == current_user.id %>
+      <%= image_tag "gomi.png", class: 'icon' %>
+      <%= link_to "ルーム削除", root_path, data: {turbo_method: :delete}, class: "nav__btn" %>
+      <% end %>
+    </div>
+
+  </div>
+</main>

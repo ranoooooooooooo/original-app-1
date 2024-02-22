@@ -82,3 +82,9 @@ end
 gem 'devise'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+
+gem 'simple_calendar', '~> 2.0'
+
+gem "sassc"
+
+gem 'active_hash'

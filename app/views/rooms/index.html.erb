@@ -1,0 +1,18 @@
+<main class="main">
+  <div class="left">
+    <%= render partial: "shared/users_friends" %>
+  </div>
+
+  <div class="right">
+    <div class="inner">
+      <% if user_signed_in? %>
+      <div class="user_profile_title">
+        <%= "参加中のルーム"%>
+        <div class="under_line"></div>
+      </div>
+      <%= render partial: "shared/rooms" %>
+      <% end %>
+    </div>
+  </div>
+
+</main>
