@@ -39,7 +39,7 @@
     <div class='form__field2'>
       <% if user_signed_in? && @room_user.user.id == current_user.id %>
       <%= image_tag "gomi.png", class: 'icon' %>
-      <%= link_to "ルーム削除", root_path, data: {turbo_method: :delete}, class: "nav__btn" %>
+      <%= link_to "ルーム削除", root_path, data: {turbo_method: :delete}, data: {confirm: "本当に削除しますか？"}, class: "nav__btn" %>
       <% end %>
     </div>
 

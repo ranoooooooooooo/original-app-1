@@ -88,3 +88,5 @@ gem 'simple_calendar', '~> 2.0'
 gem "sassc"
 
 gem 'active_hash'
+
+gem 'jquery-rails'
