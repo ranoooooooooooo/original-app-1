@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_users
-  before_action :set_room, except: [:new, :index, :show]
+  before_action :set_room, except: [:new, :create, :index, :show]
   before_action :set_room_users
 
   def index
