@@ -64,3 +64,73 @@ https://original-app-1.onrender.com
 
 # 改善点
 * 現状、参加ルーム（グループ）ごとのバラバラのカレンダーしか表示できない。ログインしているユーザーの全ての予定が反映されるカレンダーを作り、そこに自分の参加するグループの予定全て表示できるようにすると、より使いやすいと感じる。
+
+
+# テーブル設計
+
+### users テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| email                     | string     | null: false, unique: true      |
+| encrypted_password        | string     | null: false                    |
+| nickname                  | string     | null: false                    |
+| profile                   | text       |                                |
+| birthday                  | date       | null: false                    |
+
+- has_many :room_users
+- has_many :rooms, through: :room_users
+- has_many :posts
+- has_many :comments
+
+
+### rooms テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| name                      | string     | null: false                    |
+
+- has_many :room_users, dependent: :destroy
+- has_many :users, through: :room_users
+- has_many :posts, dependent: :destroy
+
+
+### room_users テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| room                      | references | null: false, foreign_key: true |
+| user                      | references | null: false, foreign_key: true |
+
+- belongs_to :room
+- belongs_to :user
+
+
+### posts テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| title                     | string     | null: false                    |
+| type_id                   | integer    | null: false                    |
+| date                      | date       |                                |
+| start_time                | datetime   |                                |
+| end_time                  | datetime   |                                |
+| content                   | text       |                                |
+| room                      | references | null: false, foreign_key: true |
+| user                      | references | null: false, foreign_key: true |
+
+- belongs_to :room
+- belongs_to :user
+- has_many :comments
+
+
+### comments テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
+| content                   | text       | null: false                    |
+| post                      | references | null: false, foreign_key: true |
+| user                      | references | null: false, foreign_key: true |
+
+- belongs_to :post
+- belongs_to :user
