@@ -68,7 +68,7 @@ https://original-app-1.onrender.com
 
 # テーブル設計
 
-### users テーブル
+### ■ users テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
@@ -84,7 +84,7 @@ https://original-app-1.onrender.com
 - has_many :comments
 
 
-### rooms テーブル
+### ■ rooms テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
@@ -95,7 +95,7 @@ https://original-app-1.onrender.com
 - has_many :posts, dependent: :destroy
 
 
-### room_users テーブル
+### ■ room_users テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
@@ -106,7 +106,7 @@ https://original-app-1.onrender.com
 - belongs_to :user
 
 
-### posts テーブル
+### ■ posts テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
@@ -124,7 +124,7 @@ https://original-app-1.onrender.com
 - has_many :comments
 
 
-### comments テーブル
+### ■ comments テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
