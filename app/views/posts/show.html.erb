@@ -32,12 +32,12 @@
         </div>
         <div class='form__field'>
           <%= image_tag "memo.png", class: 'icon' %>
-          <%= "#{@post.content}" %>
+          <div class='text', style="white-space: pre-wrap;"><%= "#{@post.content}" %></div>
         </div>
         <div class='form__field'>
         <% if user_signed_in? && @post.user.id == current_user.id %>
           <%= image_tag "pencil.png", class: 'icon' %>
-          <%= link_to "　編集　", edit_room_post_path, class: "nav__btn" %>
+          <%= link_to "投稿編集", edit_room_post_path, class: "nav__btn" %>
         <% end %>
         </div>
         <div class='form__field'>
@@ -45,6 +45,36 @@
           <%= image_tag "gomi.png", class: 'icon' %>
           <%= link_to "投稿削除", room_posts_path, data: {turbo_method: :delete}, data: {confirm: "本当に削除しますか？"}, class: "nav__btn" %>
         <% end %>
+        </div>
+
+        <div class='comment_box'>
+          <%# コメント投稿 %>
+          <div class = "comment_input_box">
+          <% if user_signed_in? %>
+            <%= form_with(model: [@post, @comment], url: room_posts_path, local: true) do |form| %>
+            <%= form.text_area :text, class: 'comment_input', placeholder: "コメントする" %>
+            <%= form.submit "SEND", class: "nav__btn2" %>
+            <% end %>
+          <% else %>
+            <p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></div>
+          <% end %>
+          </div>
+          <div class= "comments">
+            <% @comments.each do |comment| %>
+            <p>
+              <%= link_to "/users/#{comment.user.id}" do %>
+                <% if comment.user.image.present? %>
+                  <%= image_tag comment.user.image, class: "user-img" %>
+                <% else %>
+                  <%= image_tag "human.png", class: "user-img" %>
+                <% end %>
+              <% end %>
+              <%= link_to "#{comment.user.nickname}", "/users/#{comment.user.id}", class: "user_link" %>
+              <%= comment.text %>
+            </p>
+            <% end %>
+          </div>
+          <%# /コメント投稿 %>
         </div>
       </div>
         

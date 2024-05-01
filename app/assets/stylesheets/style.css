@@ -359,6 +359,38 @@ tbody {
 
 
 
+/* コメント投稿 */
+.comment_box {
+  margin: 70px 0;
+}
+.comment_input{
+  height: 50px;
+  width: 500px;
+  border: 1px #cecece solid;
+  border-radius: 3px;
+}
+.nav__btn2{
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.3em 1.6em;
+  font-size: 0.8em;
+  color: #ea9630;
+  text-decoration: none;
+  user-select: none;
+  border: 1px #ea9630 solid;
+  border-radius: 3px;
+  transition: 0.4s ease;
+  text-align: center;
+  height: 50px;
+}
+.nav__btn2:hover{
+  color: #fff;
+  background: #ea9630;
+}
+/* //コメント投稿 */
+
+
+
 /* ユーザーページ */
 .user_profile_title{
   font-size: 20px;

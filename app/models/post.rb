@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   validates :title, :type_id, presence: true
   belongs_to :room
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_one_attached :image
 
   validates :date, presence: true, unless: :start_time?
