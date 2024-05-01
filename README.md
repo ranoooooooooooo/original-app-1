@@ -41,8 +41,9 @@ https://original-app-1.onrender.com
 * いいね機能追加
 
 
-# データベース設計
-![alt text](<スクリーンショット 2024-04-11 17.01.03.png>)
+# データベース設計!
+[alt text](<スクリーンショット 2024-05-01 14.05.37.png>)
+
 
 # 画面遷移図
 ![alt text](<スクリーンショット 2024-04-11 17.03.09.png>)
@@ -80,8 +81,8 @@ https://original-app-1.onrender.com
 
 - has_many :room_users
 - has_many :rooms, through: :room_users
-- has_many :posts
-- has_many :comments
+- has_many :posts, dependent: :destroy
+- has_many :comments, dependent: :destroy
 
 
 ### ■ rooms テーブル
@@ -121,14 +122,14 @@ https://original-app-1.onrender.com
 
 - belongs_to :room
 - belongs_to :user
-- has_many :comments
+- has_many :comments, dependent: :destroy
 
 
 ### ■ comments テーブル
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
-| content                   | text       | null: false                    |
+| text                      | text       | null: false                    |
 | post                      | references | null: false, foreign_key: true |
 | user                      | references | null: false, foreign_key: true |
 
